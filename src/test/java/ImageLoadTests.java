@@ -20,7 +20,7 @@ public class ImageLoadTests extends BaseUITest {
 
     }
 
-    @Test(enabled = false, dataProvider = "submenu-data-provider", dataProviderClass = UIDataProvider.class,description = "Check to all boutiques' images whether load.")
+    @Test(dataProvider = "submenu-data-provider", dataProviderClass = UIDataProvider.class,description = "Check to all boutiques' images whether load.")
     void verifyBoutiquesImagesLoad(String data) {
 
         //PAGES INIT

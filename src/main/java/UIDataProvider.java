@@ -13,16 +13,16 @@ public class UIDataProvider {
     public Object[][] getSubmenuLinks(){
         // TODO: 18.12.2020 Menuler httprequest ile parse ederek çekilebilir??
 
-        //Generation Trendyol Categorie Data
+        //Generation Trendyol Category Data
 
-        WebDriver driver;
+        WebDriver driver = null;
 
         System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver_macos");
         driver = new ChromeDriver();
         driver.get("https://www.trendyol.com/butik/liste");
         List<WebElement> submenuItems;
         submenuItems = driver.findElements(By.xpath("//ul[@class='main-nav']//a[@class='category-header']"));
-        driver.quit();
+
 
         List<String> submenuItemsLinks = new ArrayList<String>();
         for (WebElement element: submenuItems) {
@@ -35,7 +35,7 @@ public class UIDataProvider {
         {
             data[i][0] = submenuItemsLinks.get(i);
         }
-
+        driver.quit();
         return data;
     }
 

@@ -1,8 +1,5 @@
-import components.TrendyolBoutiqueDetailPage;
+import components.*;
 import org.testng.annotations.*;
-import components.TrendyolBoutiqueListPage;
-import components.TrendyolLoginPage;
-import components.TrendyolMainPage;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
@@ -20,7 +17,7 @@ public class ImageLoadTests extends BaseUITest {
 
     }
 
-    @Test(dataProvider = "submenu-data-provider", dataProviderClass = UIDataProvider.class,description = "Check to all boutiques' images whether load.")
+    @Test(dataProvider = "submenu-data-provider", dataProviderClass = UIDataProvider.class, description = "Verify to all boutiques' images whether load.")
     void verifyBoutiquesImagesLoad(String data) {
 
         //PAGES INIT
@@ -43,7 +40,7 @@ public class ImageLoadTests extends BaseUITest {
         Assert.assertTrue(trendyolBoutiqueListPage.checkEachBigBoutiqueImage());
 
     }
-    @Test(description = "Check a random boutique's products' images load.")
+    @Test(description = "Verify a random boutique's products' images load.")
     void verifyProductsImageLoaded(){
 
         //PAGES INIT
@@ -58,7 +55,7 @@ public class ImageLoadTests extends BaseUITest {
 
         trendyolLoginPage.doLogin(username, password);
 
-        trendyolBoutiqueListPage.navigationOnMainMenu("/butik/liste/kadin");
+        trendyolBoutiqueListPage.navigationOnMainMenu("/butik/liste/erkek");
         trendyolBoutiqueListPage.goToFirstBoutiqueDetail();
 
         trendyolBoutiqueDetailPage.scrollDown();
@@ -68,7 +65,32 @@ public class ImageLoadTests extends BaseUITest {
         Assert.assertTrue(trendyolBoutiqueDetailPage.checkEachProductsImage());
 
     }
+    @Test(description = "Add to cart a product")
+    void verifyAddProductToCart(){
 
+        //PAGES INIT
+        TrendyolMainPage trendyolMainPage = PageFactory.initElements(driver, TrendyolMainPage.class);
+        TrendyolLoginPage trendyolLoginPage = PageFactory.initElements(driver,TrendyolLoginPage.class);
+        TrendyolBoutiqueListPage trendyolBoutiqueListPage = PageFactory.initElements(driver,TrendyolBoutiqueListPage.class);
+        TrendyolBoutiqueDetailPage trendyolBoutiqueDetailPage = PageFactory.initElements(driver,TrendyolBoutiqueDetailPage.class);
+        TrendyolProductPage trendyolProductPage = PageFactory.initElements(driver,TrendyolProductPage.class);
+
+        //STEPS
+        trendyolMainPage.goToTrendyolHome();
+        trendyolMainPage.goToLoginPage();
+
+        trendyolLoginPage.doLogin(username, password);
+
+        trendyolBoutiqueListPage.navigationOnMainMenu("/butik/liste/erkek");
+        trendyolBoutiqueListPage.goToFirstBoutiqueDetail();
+
+        trendyolBoutiqueDetailPage.goToFirstProduct();
+
+        trendyolProductPage.addToCart();
+
+        //There is no assertion in this task
+
+    }
     @AfterMethod
     @Override
     public void afterMethod() {

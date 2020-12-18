@@ -3,6 +3,8 @@ package components;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -21,6 +23,10 @@ public class TrendyolBoutiqueDetailPage extends TrendyolBasePage {
         List<WebElement> listOfProducts;
         listOfProducts = driver.findElements(By.xpath("//div[@class='products']//img[@class='p-card-img ']"));
         return listOfProducts;
+    }
+
+    private WebElement getFirstProduct(){
+        return driver.findElement(By.xpath("//div[@class='boutique-product'][1]"));
     }
 
     //BEHAVIOURS
@@ -52,7 +58,11 @@ public class TrendyolBoutiqueDetailPage extends TrendyolBasePage {
         }
         return isAllImagesLoad;
     }
+    public void goToFirstProduct(){
 
+        getFirstProduct().click();
+        isLoadedElement("product-detail-app");
+    }
     @Override
     public void scrollDown() {
         super.scrollDown();

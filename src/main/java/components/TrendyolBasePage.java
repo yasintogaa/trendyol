@@ -3,9 +3,12 @@ package components;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.net.URL;
 
 abstract class TrendyolBasePage {
     WebDriver driver;
@@ -44,6 +47,17 @@ abstract class TrendyolBasePage {
         }
 
     }
+
+    void isLoadedElement(String locatorID) throws Error{
+        try {
+            Assert.assertTrue(driver.findElement(By.id(locatorID)).isDisplayed());
+        }
+        catch (AssertionError e){
+            Assert.fail("Element is not displayed.");
+        }
+
+    }
+
     public void scrollDown(){
         JavascriptExecutor js = (JavascriptExecutor) driver;
         try {
